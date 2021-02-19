@@ -1,0 +1,16 @@
+/.idea
+/.vscode
+./client/.idea
+./client/.vscode
+./client/node_modules
+./server/.idea
+./server/.vscode
+./server/node_modules
+./server/uploadFiles
+./server/upload
+./server/public
+
+./server/public/images
+.server/public/images
+**server/public/*
+*server/public/*
