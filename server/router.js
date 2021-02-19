@@ -25,7 +25,7 @@ router.post(
   userController.login,
 );
 
-router.post(
+router.get(
   '/getUser',
   checkToken.checkAuth,
 );
