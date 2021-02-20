@@ -124,7 +124,7 @@ class RegistrationForm extends React.Component{
             />
 
           </div>
-          <button type='submit' 
+          <button type='submit' disabled = {submitting}
                   className={ styles.submitContainer }>
             <span className={ styles.inscription }>Create Account</span>
           </button>

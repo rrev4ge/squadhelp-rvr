@@ -1,5 +1,7 @@
+
+
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Selects', [
       {
         type: 'typeOfName',
@@ -143,5 +145,9 @@ module.exports = {
         describe: 'Builders',
       },
     ], {});
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('Selects', null, {});
   },
 };

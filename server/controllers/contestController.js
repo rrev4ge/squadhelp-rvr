@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const db = require('../models/index');
 const ServerError = require('../errors/ServerError');
 const contestQueries = require('./queries/contestQueries');
@@ -6,17 +7,18 @@ const controller = require('../socketInit');
 const UtilFunctions = require('../utils/functions');
 const CONSTANTS = require('../constants');
 
+
 module.exports.dataForContest = async (req, res, next) => {
   const response = {};
   try {
     const characteristics = await db.Selects.findAll({
       where: {
         type: {
-          [ db.Sequelize.Op.or ]: [
+          [ db.Sequelize.Op.or ]: _.compact([
             req.body.characteristic1,
             req.body.characteristic2,
             'industry',
-          ],
+          ]),
         },
       },
     });
