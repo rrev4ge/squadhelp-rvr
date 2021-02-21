@@ -105,7 +105,6 @@ module.exports.changeMark = async (req, res, next) => {
 
 module.exports.payment = async (req, res, next) => {
   let transaction;
-
   const { body: { number, cvc, expiry, price, contests } } = req;
   try {
     transaction = await bd.sequelize.transaction();
@@ -196,7 +195,7 @@ module.exports.cashout = async (req, res, next) => {
     },
     {
       cardNumber: {
-        [ bd.sequelize.Op.in ]: [
+        [ bd.Sequelize.Op.in ]: [
           CONSTANTS.SQUADHELP_BANK_NUMBER,
           req.body.number.replace(/ /g, ''),
         ],

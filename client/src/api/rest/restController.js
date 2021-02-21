@@ -1,12 +1,12 @@
 import http from '../interceptor';
 
-export const registerRequest = (data) => http.post('registration', data);
-export const loginRequest = (data) => http.post('login', data);
+export const registerRequest = (data) => http.post('/registration', data);
+export const loginRequest = (data) => http.post('/login', data);
 export const getUser = () => http.get('/getUser');
-export const updateContest = data => http.put(`/contests/${data.contestId}`, data);
+
 export const setNewOffer = data => http.post('setNewOffer', data);
 export const setOfferStatus = data => http.post('setOfferStatus', data);
-export const downloadContestFile = (data) => http.get('downloadFile/' + data.fileName);
+export const downloadContestFile = (data) => http.post('downloadFile/' + data.fileName);
 export const payMent = (data) => http.post('pay', data.formData);
 export const changeMark = (data) => http.post('changeMark', data);
 export const getPreviewChat = () => http.post('getPreview');
@@ -33,16 +33,26 @@ export const getCustomersContests = (data) => {
 
 // http://host:port/api/contests
 export const getActiveContests = ({offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}) => {
-    return http.get('/contests', {offset, limit, typeIndex, contestId, industry, awardSort, ownEntries})
+    // return http.get(`/contests?offset=${offset}&limit=${limit}&typeIndex=${typeIndex}&contestId=${contestId}&industry=${industry}&awardSort=${awardSort}&ownEntries=${ownEntries}`);
+
+    return http.post(`/contests`, 
+    { offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}
+    );
+
 };
 
 //
 //export const getContestById = (data) => {
 export const getContestById = ({contestId}) => {
-    return http.get(`/contests/:${contestId}`, {
-        headers: {
-            contestId: contestId
-        }
-    });
+    
+    return http.get(`/contests/${contestId}`, 
+    // {
+    //     headers: {
+    //         contestId: contestId
+    //     }}
+    
+    );
 };
+
+export const updateContest = data => http.put(`/contests/${data.contestId}`, data);
 // view - actionCreator(action) -> rootSaga -> itemSaga -> api

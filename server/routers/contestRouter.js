@@ -8,7 +8,7 @@ const contestRouter = Router();
 
 // router.post(
 //   '/getAllContests',
-contestRouter.get(
+contestRouter.post(
   '/',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
