@@ -112,14 +112,14 @@ module.exports.payment = async (req, res, next) => {
     await bankQueries.updateBankBalance({
       balance: bd.sequelize.literal(`
         CASE
-          WHEN "cardNumber"='${number.replace(/ /g, '') }'
-            AND "cvc"='${cvc}'
-            AND "expiry"='${expiry}'
-          THEN "balance"-${price}
+          WHEN "cardNumber"='${ number.replace(/ /g, '') }'
+            AND "cvc"='${ cvc }'
+            AND "expiry"='${ expiry }'
+          THEN "balance"-${ price }
           WHEN "cardNumber"='${ CONSTANTS.SQUADHELP_BANK_NUMBER }'
             AND "cvc"='${ CONSTANTS.SQUADHELP_BANK_CVC }'
             AND "expiry"='${ CONSTANTS.SQUADHELP_BANK_EXPIRY }'
-          THEN "balance"+${price}
+          THEN "balance"+${ price }
         END
         `),
     },
@@ -135,7 +135,7 @@ module.exports.payment = async (req, res, next) => {
     const orderId = uuid();
     contests.forEach((contest, index) => {
       const prize = index === contests.length - 1 ? Math.ceil(
-        req.body.price / contests.length)
+        price / contests.length)
         : Math.floor(price / contests.length);
       contest = Object.assign(contest, {
         status: index === 0 ? 'active' : 'pending',
