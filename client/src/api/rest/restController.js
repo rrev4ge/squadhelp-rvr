@@ -3,7 +3,6 @@ import http from '../interceptor';
 export const registerRequest = (data) => http.post('/registration', data);
 export const loginRequest = (data) => http.post('/login', data);
 export const getUser = () => http.get('/getUser');
-
 export const setNewOffer = data => http.post('setNewOffer', data);
 export const setOfferStatus = data => http.post('setOfferStatus', data);
 export const downloadContestFile = (data) => http.post('downloadFile/' + data.fileName);
@@ -23,21 +22,23 @@ export const createCatalog = (data) => http.post('createCatalog', data);
 export const deleteCatalog = (data) => http.post('deleteCatalog', data);
 export const removeChatFromCatalog = (data) => http.post('removeChatFromCatalog', data);
 export const changeCatalogName = (data) => http.post('updateNameCatalog', data);
-export const getCustomersContests = (data) => {
-    return http.post('getCustomersContests', {limit: data.limit, offset: data.offset}, {
-        headers: {
-            status: data.contestStatus
-        }
-    });
+
+// export const getCustomersContests = (data) => {
+export const getCustomersContests = ({offset, limit, contestStatus}) => {
+    // return http.post('getCustomersContests', {limit: data.limit, offset: data.offset}, {
+    //     headers: {
+    //         status: data.contestStatus
+    //     }
+    // });
+        return http.get(`/contests/customer?offset=${offset}&limit=${limit}&contestStatus=${contestStatus}`);
 };
 
 // http://host:port/api/contests
 export const getActiveContests = ({offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}) => {
-    // return http.get(`/contests?offset=${offset}&limit=${limit}&typeIndex=${typeIndex}&contestId=${contestId}&industry=${industry}&awardSort=${awardSort}&ownEntries=${ownEntries}`);
-
-    return http.post(`/contests`, 
-    { offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}
-    );
+    return http.get(`/contests/active?offset=${offset}&limit=${limit}&typeIndex=${typeIndex}&contestId=${contestId}&industry=${industry}&awardSort=${awardSort}&ownEntries=${ownEntries}`);
+    // return http.post(`/contests/active`, 
+    // { offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}
+    // );
 
 };
 
@@ -45,7 +46,7 @@ export const getActiveContests = ({offset, limit, typeIndex, contestId, industry
 //export const getContestById = (data) => {
 export const getContestById = ({contestId}) => {
     
-    return http.get(`/contests/${contestId}`, 
+    return http.get(`/contests/id/${contestId}`, 
     // {
     //     headers: {
     //         contestId: contestId
@@ -54,5 +55,5 @@ export const getContestById = ({contestId}) => {
     );
 };
 
-export const updateContest = data => http.put(`/contests/${data.contestId}`, data);
+export const updateContest = data => http.put(`/contests/id/${data.contestId}`, data);
 // view - actionCreator(action) -> rootSaga -> itemSaga -> api
