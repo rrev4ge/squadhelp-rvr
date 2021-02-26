@@ -266,7 +266,7 @@ module.exports.getActiveContests = (req, res, next) => {
       {
         model: db.Offers,
         required: ownEntries,
-        where: req.body.ownEntries ? { userId: req.tokenData.userId } : {},
+        where: ownEntries ? { userId: req.tokenData.userId } : {},
         attributes: ['id'],
       },
     ],

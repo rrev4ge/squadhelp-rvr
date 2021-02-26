@@ -1,18 +1,10 @@
 import http from '../interceptor';
 
-export const registerRequest = (data) => http.post('/registration', data);
-export const loginRequest = (data) => http.post('/login', data);
-export const getUser = () => http.get('/getUser');
-export const setNewOffer = data => http.post('setNewOffer', data);
-export const setOfferStatus = data => http.post('setOfferStatus', data);
-export const downloadContestFile = (data) => http.post('downloadFile/' + data.fileName);
-export const payMent = (data) => http.post('pay', data.formData);
-export const changeMark = (data) => http.post('changeMark', data);
+// view - actionCreator(action) -> rootSaga -> itemSaga -> api
+
+//Chat
 export const getPreviewChat = () => http.post('getPreview');
 export const getDialog = (data) => http.post('getChat', data);
-export const dataForContest = (data) => http.post('dataForContest', data);
-export const cashOut = (data) => http.post('cashout', data);
-export const updateUser = (data) => http.post('updateUser', data);
 export const newMessage = (data) => http.post('newMessage', data);
 export const changeChatFavorite = (data) => http.post('favorite', data);
 export const changeChatBlock = (data) => http.post('blackList', data);
@@ -23,37 +15,27 @@ export const deleteCatalog = (data) => http.post('deleteCatalog', data);
 export const removeChatFromCatalog = (data) => http.post('removeChatFromCatalog', data);
 export const changeCatalogName = (data) => http.post('updateNameCatalog', data);
 
-// export const getCustomersContests = (data) => {
+//Contests
 export const getCustomersContests = ({offset, limit, contestStatus}) => {
-    // return http.post('getCustomersContests', {limit: data.limit, offset: data.offset}, {
-    //     headers: {
-    //         status: data.contestStatus
-    //     }
-    // });
-        return http.get(`/contests/customer?offset=${offset}&limit=${limit}&contestStatus=${contestStatus}`);
+    return http.get(`/contests/customer?offset=${offset}&limit=${limit}&contestStatus=${contestStatus}`);
 };
-
-// http://host:port/api/contests
 export const getActiveContests = ({offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}) => {
     return http.get(`/contests/active?offset=${offset}&limit=${limit}&typeIndex=${typeIndex}&contestId=${contestId}&industry=${industry}&awardSort=${awardSort}&ownEntries=${ownEntries}`);
-    // return http.post(`/contests/active`, 
-    // { offset, limit, typeIndex, contestId, industry, awardSort, ownEntries}
-    // );
-
 };
-
-//
-//export const getContestById = (data) => {
 export const getContestById = ({contestId}) => {
-    
-    return http.get(`/contests/id/${contestId}`, 
-    // {
-    //     headers: {
-    //         contestId: contestId
-    //     }}
-    
-    );
+    return http.get(`/contests/id/${contestId}`);
 };
-
 export const updateContest = data => http.put(`/contests/id/${data.contestId}`, data);
-// view - actionCreator(action) -> rootSaga -> itemSaga -> api
+export const dataForContest = (data) => http.post('/contests/data', data);
+export const getContestFile = ({fileName}) => http.get(`/contests/getFile/${fileName}`);
+export const setNewOffer = data => http.post('/contests/createNewOffer', data);
+export const setOfferStatus = data => http.post('/contests/setOfferStatus', data);
+
+//Users
+export const updateUser = (data) => http.post('/users/update', data);
+export const registerRequest = (data) => http.post('/users/registration', data);
+export const loginRequest = (data) => http.post('/users/login', data);
+export const getUser = () => http.get('/users/get');
+export const cashOut = (data) => http.post('/users/cashout', data);
+export const payMent = (data) => http.post('/users/pay', data.formData);
+export const changeMark = (data) => http.post('/users/changeMark', data);

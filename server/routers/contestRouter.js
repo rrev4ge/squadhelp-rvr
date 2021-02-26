@@ -7,18 +7,22 @@ const upload = require('./../utils/fileUpload');
 
 const contestRouter = Router();
 
-// router.post(
-//   '/getAllContests',
+
 contestRouter.get(
   '/active',
   checkToken.checkToken,
   basicMiddlewares.onlyForCreative,
   dataParsing.queryParser,
-  contestController.getActiveContests);
+  contestController.getActiveContests
+);
 
-// check update mw, controller
-// router.get(
-//   '/getContestById',
+contestRouter.get(
+  '/customer',
+  checkToken.checkToken,
+  dataParsing.queryParser,
+  contestController.getCustomersContests,
+);
+
 contestRouter.get(
   '/id/:contestId',
   checkToken.checkToken,
@@ -27,9 +31,6 @@ contestRouter.get(
 );
 
 
-// update mw, controller
-// router.post(
-//   '/updateContest',
 contestRouter.put(
   '/id/:contestId',
   checkToken.checkToken,
@@ -37,14 +38,31 @@ contestRouter.put(
   contestController.updateContest,
 );
 
-
-// router.post(
-//   '/getCustomersContests',
-contestRouter.get(
-  '/customer',
+contestRouter.post(
+  '/data',
   checkToken.checkToken,
-  dataParsing.queryParser,
-  contestController.getCustomersContests,
+  contestController.dataForContest,
+);
+
+contestRouter.get(
+  '/getFile/:fileName',
+  checkToken.checkToken,
+  contestController.downloadFile,
+);
+
+contestRouter.post(
+  '/createNewOffer',
+  checkToken.checkToken,
+  upload.uploadLogoFiles,
+  basicMiddlewares.canSendOffer,
+  contestController.setNewOffer,
+);
+
+contestRouter.post(
+  '/setOfferStatus',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForCustomerWhoCreateContest,
+  contestController.setOfferStatus,
 );
 
 module.exports = contestRouter;
