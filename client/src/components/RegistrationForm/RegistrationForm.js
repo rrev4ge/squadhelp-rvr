@@ -1,8 +1,6 @@
-import React from 'react';
-import Error from '../Error/Error';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { authActionRegister, clearAuth } from '../../actions/actionCreator';
-import { Redirect } from 'react-router-dom';
 import styles from './RegistrationForm.module.sass';
 import { Field, reduxForm } from 'redux-form';
 import FormInput from '../FormInput/FormInput';
@@ -10,17 +8,23 @@ import RoleInput from '../RoleInput/RoleInput';
 import AgreeTermOfServiceInput
   from '../AgreeTermOfServiceInput/AgreeTermOfServiceInput';
 import CONSTANTS from '../../constants';
+import Error from '../Error/Error';
 import customValidator from '../../validators/validator';
 import Schems from '../../validators/validationSchems';
+import { bindActionCreators } from 'redux';
 
-class RegistrationForm extends React.Component{
+const RegistrationForm = (props) =>{
 
-  componentWillUnmount () {
-    this.props.authClear();
-  }
+  const {handleSubmit, submitting} = props;
+  const { error } = useSelector(state => state.auth);
 
-  clicked = (values) => {
-    this.props.register({
+  const dispatch = useDispatch();
+  const register = bindActionCreators(authActionRegister, dispatch);
+  const authClear = bindActionCreators(clearAuth, dispatch);
+
+
+  const clickSubmit = (values) => {
+    register({
       firstName: values.firstName,
       lastName: values.lastName,
       displayName: values.displayName,
@@ -30,9 +34,7 @@ class RegistrationForm extends React.Component{
     });
   };
 
-  render () {
-    const {handleSubmit, submitting, auth, authClear} = this.props;
-    const {error} = auth;
+  
     const formInputClasses = {
       container: styles.inputContainer,
       input: styles.input,
@@ -40,19 +42,12 @@ class RegistrationForm extends React.Component{
       notValid: styles.notValid,
       valid: styles.valid,
     };
+
+
     return (
-      <div className={ styles.signUpFormContainer }>
-        { error && <Error data={ error.data } status={ error.status }
-                          clearError={ authClear }/> }
-        <div className={ styles.headerFormContainer }>
-          <h2>
-            CREATE AN ACCOUNT
-          </h2>
-          <h4>
-            We always keep your name and email address private.
-          </h4>
-        </div>
-        <form onSubmit={ handleSubmit(this.clicked) }>
+        <form onSubmit={ handleSubmit(clickSubmit) }>
+          { error && <Error data={ error.data } status={ error.status }
+                          clearError={ authClear }/>}
           <div className={ styles.row }>
             <Field
               name='firstName'
@@ -63,11 +58,11 @@ class RegistrationForm extends React.Component{
             />
             <Field
               name='lastName'
-              classes={ formInputClasses }
-              component={ FormInput }
-              type='text'
-              label='Last name'
-            />
+                classes={ formInputClasses }
+                component={ FormInput }
+                type='text'
+                label='Last name'
+              />
           </div>
           <div className={ styles.row }>
             <Field
@@ -103,13 +98,13 @@ class RegistrationForm extends React.Component{
           </div>
           <div className={ styles.choseRoleContainer }>
             <Field name='role' type='radio' value={ CONSTANTS.CUSTOMER }
-                   strRole='Join As a Buyer'
-                   infoRole='I am looking for a Name, Logo or Tagline for my business, brand or product.'
-                   component={ RoleInput } id={ CONSTANTS.CUSTOMER }/>
+              strRole='Join As a Buyer'
+              infoRole='I am looking for a Name, Logo or Tagline for my business, brand or product.'
+              component={ RoleInput } id={ CONSTANTS.CUSTOMER }/>
             <Field name='role' type='radio' value={ CONSTANTS.CREATOR }
-                   strRole='Join As a Creative'
-                   infoRole='I plan to submit name ideas, Logo designs or sell names in Domain Marketplace.'
-                   component={ RoleInput } id={ CONSTANTS.CREATOR }/>
+              strRole='Join As a Creative'
+              infoRole='I plan to submit name ideas, Logo designs or sell names in Domain Marketplace.'
+              component={ RoleInput } id={ CONSTANTS.CREATOR }/>
           </div>
           <div className={ styles.termsOfService }>
             <Field
@@ -122,35 +117,18 @@ class RegistrationForm extends React.Component{
               component={ AgreeTermOfServiceInput }
               type='checkbox'
             />
-
           </div>
-          <button type='submit' disabled = {submitting}
-                  className={ styles.submitContainer }>
+          <button type='submit' disabled = {submitting} className={ styles.submitContainer }>
             <span className={ styles.inscription }>Create Account</span>
-          </button>
-        </form>
-      </div>
+          </button>  
+        </form> 
     );
-  }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-    initialValues: {
-      role: CONSTANTS.CUSTOMER,
-    },
-  };
-};
-
-const mapDispatchToProps = (dispatch) => (
-  {
-    register: (data) => dispatch(authActionRegister(data)),
-    authClear: () => dispatch(clearAuth()),
-  }
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
+export default reduxForm({
   form: 'login',
   validate: customValidator(Schems.RegistrationSchem),
-})(RegistrationForm));
+  initialValues: {
+      role: CONSTANTS.CUSTOMER,
+  },
+})(RegistrationForm);

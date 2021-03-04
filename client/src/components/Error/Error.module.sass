@@ -1,29 +1,34 @@
 .errorContainer
-  width: auto
-  align-self: center
   display: flex
+  position: absolute
   flex-direction: row
   justify-content: center
   align-items: center
-  border-radius: 26px
-  padding: 15px 10px
-  background-color: red
-  position: relative
-  cursor: pointer
+  color: white
+  font-size: 18px
+  border-radius: 5px 
+  border: 1px solid #b72522
+  bottom: 12px
+  padding: 10px 0
+  text-align: center
+  background-color: #b72522
+  width: 100%
+  z-index: 1
+
   span
-    font-size: 16px
+    font-size: 18px
     color: white
   i
     color: white
     font-size: 26px
     position: absolute
     cursor: pointer
-    top: -4px
-    right: -4px
+    top: -15px
+    right: -15px
     transition: font-size 0.2s
     &:hover
-      top: -8px
-      right: -8px
+      top: -20px
+      right: -20px
       color: #4e618d
       font-size: 32px
       transition: font-size 0.2s

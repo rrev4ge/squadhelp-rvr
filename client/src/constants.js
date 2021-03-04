@@ -77,6 +77,7 @@ export default {
         'Managed Agency Service',
       ],
     },
+
     {
       title: 'LEGAL',
       items: [
@@ -86,4 +87,7 @@ export default {
       ],
     },
   ],
+  CONTACT_US: {
+    PHONE: '(877)355-3585',
+  },
 };

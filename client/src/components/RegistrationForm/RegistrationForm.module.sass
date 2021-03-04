@@ -1,176 +1,193 @@
-.signUpFormContainer
-  width: 60%
+form
+  position: relative
+
+.choseRoleContainer
   display: flex
-  min-width: 280px
-  margin: 0 auto
   flex-direction: column
   justify-content: center
+  align-items: stretch
+  align-self: stretch
+  min-width: 260px
+  margin-left: 20px
+  margin-right: 20px
+  @media(max-width: 850px)
+    align-self: auto
+
+.submitContainer
+  align-self: stretch
+  position: relative
+  min-width: 260px
+  border-radius: 5px
+  display: flex
+  justify-content: center
   align-items: center
-  margin-top: 80px
-  padding: 10px 20px 30px
-  box-sizing: border-box
+  background-color: #28d2d0
+  height: 64px
+  margin-left: 20px
+  padding: 0
+  border: 0
+  width: fill-available
+  margin-right: 20px
+  @media(max-width: 850px)
+    align-self: auto
 
-  .choseRoleContainer
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: stretch
-    align-self: stretch
-    min-width: 260px
-    margin-left: 20px
-    margin-right: 20px
-    @media(max-width: 850px)
-      align-self: auto
 
-  .submitContainer
-    align-self: stretch
-    min-width: 260px
-    border-radius: 5px
+.inscription
+  font-size: 16px
+  color: white
+
+.termsOfService
+  position: relative
+  text-align: center
+  color: white
+  font-size: 16px
+  min-width: 260px
+  align-self: stretch
+  margin-right: 20px
+  margin-left: 20px
+  margin-bottom: 10px 
+
+
+  .fieldWarning
     display: flex
+    position: absolute
+    flex-direction: row
     justify-content: center
     align-items: center
-    background-color: #28d2d0
-    height: 64px
-    margin-left: 20px
-    padding: 0
-    border: 0
-    width: fill-available
-    margin-right: 20px
-    @media(max-width: 850px)
-      align-self: auto
-
-
-  .inscription
-    font-size: 16px
     color: white
-
-  .termsOfService
+    font-size: 18px
+    border-radius: 5px 
+    border: 1px solid #b72522
+    margin-top: 0px
+    padding: 10px 0
     text-align: center
+    background-color: #b72522
+    width: 100%
+    z-index: 1
+
+  .fieldWarning::after
+    content: ''
+    position: absolute
+    left: 47% 
+    top: -20px
+    border: 10px solid transparent
+    border-bottom: 10px solid #b72522;
+
+  @media(max-width: 850px)
+    align-self: auto
+
+  a
     color: white
     font-size: 16px
-    min-width: 260px
-    align-self: stretch
+
+
+.error
+  text-align: center
+  color: white
+  font-size: 20px
+  min-width: 260px
+  align-self: stretch
+  margin-right: 20px
+  margin-left: 20px
+  border: 1px solid white
+  background-color: red
+  padding-top: 5px
+  padding-bottom: 5px
+  border-radius: 6px
+  margin-bottom: 10px
+  @media(max-width: 850px)
+    align-self: auto
+
+.row
+  width: 100%
+  min-width: 260px
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  align-items: center
+  justify-content: space-between
+  @media (max-width: 795px)
+    width: auto
+
+  .inputContainer
+    display: flex
+    position: relative
+    flex-direction: column
+    justify-content: center
+    align-self: flex-start
     margin-right: 20px
     margin-left: 20px
-    margin-bottom: 10px
-
+    flex: 1 1
 
     .fieldWarning
       font-size: 15px
       display: flex
+      position: absolute
       flex-direction: row
       justify-content: center
       align-items: center
       color: white
+      font-size: 18px
+      border-radius: 5px 
       border: 1px solid #b72522
-      margin-bottom: 15px
-      padding-bottom: 5px
-      padding-top: 5px
+      margin-top: 113px
+      padding: 10px 0
       text-align: center
+      background-color: #b72522
+      width: 100%
+      z-index: 1
 
-    @media(max-width: 850px)
-      align-self: auto
+    .fieldWarning::after
+      content: ''
+      position: absolute
+      left: 47%
+      top: -20px
+      border: 10px solid transparent
+      border-bottom: 10px solid #b72522;
 
-    a
-      color: white
-      font-size: 16px
+  .input
+    background-color: white
+    border: 2px solid transparent
+    border-radius: 4px
+    color: #9ca8b7
+    font-size: 18px
+    padding: 23px 20px 23px 20px
+    outline: none
+    margin-bottom: 15px
+    flex: 1
+    @media(max-width: 1400px)
+      align-self: normal
 
+  .notValid
+    border: 2px solid red !important
 
-  .error
-    text-align: center
+  .valid
+    border: 2px solid green
+
+.headerFormContainer
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  margin-bottom: 18px
+  text-align: center
+
+  h2
+    color: white
+    font-size: 42px
+    font-weight: 600
+    line-height: 1.1
+    margin-top: 20px
+    margin-bottom: 10px
+    letter-spacing: 1px
+
+  h4
     color: white
     font-size: 20px
-    min-width: 260px
-    align-self: stretch
-    margin-right: 20px
-    margin-left: 20px
-    border: 1px solid white
-    background-color: red
-    padding-top: 5px
-    padding-bottom: 5px
-    border-radius: 6px
-    margin-bottom: 10px
-    @media(max-width: 850px)
-      align-self: auto
-
-  .row
-    width: 100%
-    min-width: 260px
-    display: flex
-    flex-direction: row
-    flex-wrap: wrap
-    align-items: center
-    justify-content: space-between
-    @media (max-width: 795px)
-      width: auto
-
-    .inputContainer
-      display: flex
-      flex-direction: column
-      justify-content: center
-      align-self: flex-start
-      margin-right: 20px
-      margin-left: 20px
-      flex: 1 1
-
-      .fieldWarning
-        font-size: 15px
-        display: flex
-        flex-direction: row
-        justify-content: center
-        align-items: center
-        color: white
-        border: 1px solid #b72522
-        margin-bottom: 15px
-        padding-bottom: 5px
-        padding-top: 5px
-        text-align: center
-
-    .input
-      background-color: white
-      border: none
-      border-radius: 4px
-      color: #9ca8b7
-      font-size: 18px
-      padding: 23px 20px 23px 20px
-      outline: none
-      margin-bottom: 15px
-      flex: 1
-      @media(max-width: 1400px)
-        align-self: normal
-
-    .notValid
-      border: 2px solid red !important
-
-    .valid
-      border: 2px solid green
-
-
-  .headerFormContainer
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
-    margin-bottom: 18px
+    font-weight: 500
+    word-spacing: 3px
+    width: 88%
+    margin: 0
+    margin-bottom: 13px
     text-align: center
-
-
-    h2
-      color: white
-      font-size: 42px
-      font-weight: 600
-      line-height: 1.1
-      margin-top: 20px
-      margin-bottom: 10px
-      letter-spacing: 1px
-
-    h4
-      color: white
-      font-size: 20px
-      font-weight: 500
-      word-spacing: 3px
-      width: 88%
-      margin: 0
-      margin-bottom: 13px
-      text-align: center
-      line-height: 27px
+    line-height: 27px

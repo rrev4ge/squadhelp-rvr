@@ -15,12 +15,6 @@ export const authActionRegister = (data) => {
     }
 };
 
-export const clearErrorSignUpAndLogin = () => {
-    return {
-        type: ACTION.AUTH_ACTION_CLEAR_ERROR
-    }
-};
-
 export const clearUserStore = () => {
     return {
         type: ACTION.CLEAR_USER_STORE
@@ -203,6 +197,11 @@ export const clearAuth = () => {
     }
 };
 
+export const clearErrorSignUpAndLogin = () => {
+    return {
+        type: ACTION.AUTH_ACTION_CLEAR_ERROR
+    }
+};
 
 export const getPreviewChat = () => {
     return {

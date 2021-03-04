@@ -1,16 +1,25 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import LoginForm from '../../components/LoginForm/LoginForm';
 import Logo from '../../components/Logo';
 import styles from './LoginPage.module.sass';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { clearErrorSignUpAndLogin } from '../../actions/actionCreator';
 import CONSTANTS from '../../constants';
+import { clearErrorSignUpAndLogin } from '../../actions/actionCreator';
 
 const LoginPage = (props) => {
+
+  const dispatch = useDispatch();
+  const clearError = bindActionCreators(clearErrorSignUpAndLogin, dispatch);
+
+  clearError();
+  
   const changeRoute = () => {
     props.history.replace('/');
   };
+
   return (
     <div className={ styles.mainContainer }>
       <div className={ styles.loginContainer }>
@@ -22,7 +31,10 @@ const LoginPage = (props) => {
           </div>
         </div>
         <div className={ styles.loginFormContainer }>
-          <LoginForm changeRoute={ changeRoute }/>
+          <div className={ styles.loginForm }>
+            <h2>LOGIN TO YOUR ACCOUNT</h2>
+            <LoginForm changeRoute={ changeRoute }/>
+          </div>
         </div>
       </div>
     </div>
@@ -30,10 +42,4 @@ const LoginPage = (props) => {
 
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    clearError: () => dispatch(clearErrorSignUpAndLogin()),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(LoginPage);
+export default LoginPage;

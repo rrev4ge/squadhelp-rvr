@@ -2,7 +2,9 @@ import React from 'react';
 import styles from './Error.module.sass';
 
 const Error=props=>{
+
     const getMessage=()=>{
+        
         const {status,data}=props;
         switch (status) {
             case 404:

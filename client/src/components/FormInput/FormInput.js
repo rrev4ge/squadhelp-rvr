@@ -1,9 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types'
 
 const FormInput = (props) => {
 
   const {label, input, type, classes, meta: {touched, error}} = props;
+
+  console.log(props.meta, );
 
   const inputClassName = classNames(classes.input, {
     [classes.notValid]: touched && error,
@@ -18,6 +21,23 @@ const FormInput = (props) => {
         ( error && <span className={ classes.warning }>{ error }</span> ) ) }
     </div>
   );
+};
+
+FormInput.propTypes = {
+  label: PropTypes.string.isRequired,
+  input: PropTypes.object.isRequired, 
+  type: PropTypes.string.isRequired, 
+  classes: PropTypes.shape({
+    container: PropTypes.string.isRequired,
+    input: PropTypes.string.isRequired,
+    warning: PropTypes.string.isRequired,
+    notValid: PropTypes.string.isRequired,
+    valid: PropTypes.string.isRequired,
+  }), 
+  meta: PropTypes.shape({
+    touched: PropTypes.bool.isRequired, 
+    error: PropTypes.isRequired,
+  }),
 };
 
 export default FormInput;
