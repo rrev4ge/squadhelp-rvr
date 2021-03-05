@@ -56,6 +56,28 @@ module.exports.registration = async (req, res, next) => {
   }
 };
 
+module.exports.updateUser = async (req, res, next) => {
+  try {
+    if (req.file) {
+      req.body.avatar = req.file.filename;
+    }
+    const updatedUser = await userQueries.updateUser(req.body,
+      req.tokenData.userId);
+    res.send({
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      displayName: updatedUser.displayName,
+      avatar: updatedUser.avatar,
+      email: updatedUser.email,
+      balance: updatedUser.balance,
+      role: updatedUser.role,
+      id: updatedUser.id,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 function getQuery (offerId, userId, mark, isFirst, transaction) {
   const getCreateQuery = () => ratingQueries.createRating({
     offerId,
@@ -154,28 +176,6 @@ module.exports.payment = async (req, res, next) => {
   }
 };
 
-module.exports.updateUser = async (req, res, next) => {
-  try {
-    if (req.file) {
-      req.body.avatar = req.file.filename;
-    }
-    const updatedUser = await userQueries.updateUser(req.body,
-      req.tokenData.userId);
-    res.send({
-      firstName: updatedUser.firstName,
-      lastName: updatedUser.lastName,
-      displayName: updatedUser.displayName,
-      avatar: updatedUser.avatar,
-      email: updatedUser.email,
-      balance: updatedUser.balance,
-      role: updatedUser.role,
-      id: updatedUser.id,
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 module.exports.cashout = async (req, res, next) => {
   let transaction;
   try {
@@ -206,6 +206,16 @@ module.exports.cashout = async (req, res, next) => {
     res.send({ balance: updatedUser.balance });
   } catch (err) {
     transaction.rollback();
+    next(err);
+  }
+};
+
+module.exports.transactions = async (req, res, next) => {
+  let transaction;
+  try {
+    transaction = await bd.sequelize.transaction();
+  }
+  catch (err) {
     next(err);
   }
 };

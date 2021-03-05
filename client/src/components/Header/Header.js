@@ -37,6 +37,7 @@ class Header extends React.Component{
                             <li><Link to='/dashboard'
                                       style={{textDecoration: 'none'}}><span>View Dashboard</span></Link></li>
                             <li><Link to='/account' style={{textDecoration: 'none'}}><span>My Account</span></Link></li>
+                            <li><Link to='/transactions' style={{textDecoration: 'none'}}><span>My Transactions</span></Link></li>
                             <li><Link to='/'
                                       style={{textDecoration: 'none'}}><span>Messages</span></Link></li>
                             <li><Link to='/dashboard' style={{textDecoration: 'none'}}><span>Affiliate Dashboard</span></Link>
@@ -70,7 +71,7 @@ class Header extends React.Component{
                 <div className={styles.loginSignnUpHeaders}>
                     <div className={styles.numberContainer}>
                         <img src={`${CONSTANTS.STATIC_IMAGES_PATH}phone.png`} alt='phone'/>
-                        <a href={`tel:${CONSTANTS.CONTACT_US.PHONE}`}>${CONSTANTS.CONTACT_US.PHONE}</a>
+                        <a href={`tel:${CONSTANTS.CONTACT_US.PHONE}`}>{CONSTANTS.CONTACT_US.PHONE}</a>
                     </div>
                     <div className={styles.userButtonsContainer}>
                         {this.renderLoginButtons()}

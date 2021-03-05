@@ -52,6 +52,7 @@ const RegistrationPage = (props) => {
               ColumnContainer: styles.ColumnContainer,
               headerArticle: styles.headerArticle,
               article: styles.article,
+              orangeSpan: styles.orangeSpan,
         }} />
       </div>
     </div>

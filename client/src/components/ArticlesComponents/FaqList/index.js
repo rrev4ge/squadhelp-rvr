@@ -15,6 +15,7 @@ const FaqList = (props) => {
                             classes={{
                                 headerArticle: classes.headerArticle,
                                 article: classes.article,
+                                orangeSpan: classes.orangeSpan,
                             }}
 
               />

@@ -57,4 +57,10 @@ userRouter.post(
   userController.cashout,
 );
 
+userRouter.get(
+  '/transactions',
+  checkToken.checkToken,
+  userController.transactions,
+);
+
 module.exports = userRouter;

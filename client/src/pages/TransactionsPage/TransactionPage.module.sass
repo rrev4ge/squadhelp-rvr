@@ -1,0 +1,50 @@
+
+.listWrapper
+    margin-top: 50px
+
+.listName
+    padding: 15px
+    text-align: center
+    font-weight: bold
+    font-size: 1.5rem
+    color: #808080
+
+
+.table
+    display: grid
+    border-collapse: collapse
+    width: 80%
+    margin: auto
+    grid-template-columns: minmax(150px, 0.2fr) minmax(150px, 0.5fr) minmax(150px, 0.5fr) minmax(150px, 1fr)
+
+.tableHeader, .tableBody, .tableItem
+    display: contents
+
+.headerData, .itemData
+    padding: 15px
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+.headerData, .noData
+    position: sticky
+    top: 0
+    background: #6c7ae0
+    text-align: center
+    font-weight: bold
+    font-size: 1.3rem
+    color: white
+
+    &:last-child
+        border: 0
+
+
+
+.itemData
+    padding-top: 10px
+    padding-bottom: 10px
+    color: #808080
+    text-align: center
+
+.tableItem:nth-child(even) .itemData
+    background: #f8f6ff

@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactHtmlParser from 'react-html-parser';
 
 const FaqListItem = (props) => {
 
@@ -10,7 +11,7 @@ const FaqListItem = (props) => {
                   {header}
                 </div>
                 <div className={ classes.article }>
-                  {body}
+                  {ReactHtmlParser(body)}
                 </div>
         </>
     )
