@@ -1,22 +1,19 @@
-FROM node:14.15.5
+FROM node:14.16.0-alpine3.11
 
-ARG NODE_ENV="development"
+ARG NODE_ENV="production"
 
-RUN mkdir /server
+RUN mkdir ./server \
+    && mkdir -p /var/www/html/images/
 
-RUN mkdir -p /var/www/html/images
 
 WORKDIR /server
 
-COPY package*.json ./
-
-RUN npm install -g nodemon
-RUN npm install -g sequelize-cli
+COPY . .
 
 RUN npm install
 
-COPY . .
-
 EXPOSE 3000
 
-CMD npm start
+RUN npm run build
+
+CMD node ./dist/index.js
