@@ -47,6 +47,12 @@ export const getUserAction = (data) => {
     }
 };
 
+export const getUserTransactionAction = (data) => {
+    return {
+        type: ACTION.GET_USER_TRANSACTIONS_ACTION,
+        payload: data
+    }
+}
 
 export const getDataForContest = (data) => {
     return {

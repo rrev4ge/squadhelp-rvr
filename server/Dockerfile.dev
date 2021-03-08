@@ -1,4 +1,4 @@
-FROM FROM node:14.16.0-alpine3.11
+FROM node:14.16.0-alpine3.11
 
 ARG NODE_ENV="development"
 
@@ -11,8 +11,6 @@ COPY . .
 
 RUN npm install
 
+EXPOSE 5000
 
-
-EXPOSE 3000
-
-CMD npm start
+CMD npm run start-dev

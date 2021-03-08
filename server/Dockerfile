@@ -5,14 +5,13 @@ ARG NODE_ENV="production"
 RUN mkdir ./server \
     && mkdir -p /var/www/html/images/
 
-
 WORKDIR /server
 
 COPY . .
 
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 5000
 
 RUN npm run build
 

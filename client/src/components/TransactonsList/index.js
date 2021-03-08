@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import TransactionsListItem from './TransactionListItem'
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getUserTransactionAction } from '../../actions/actionCreator';
 
 const TransactionsList = (props) => {
 
-    const { transactions, classes } = props
+    const { classes } = props
+
+    const {transactions} = useSelector(state => state.transactions)
+    const dispatch = useDispatch();
+    const getTransactions = bindActionCreators(getUserTransactionAction, dispatch)
+
+    useEffect(getTransactions(),[])
+
 
     return (
         <div>

@@ -24,14 +24,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DECIMAL,
     },
-    userID: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      required: {
+        model: 'Users',
+        key: 'id',
+      },
     },
   }, {
     sequelize,
-    modelName: 'Transactions',
-    underscored: true,
+    modelName: 'Transaction',
     tableName: 'Transactions',
   });
 

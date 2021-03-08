@@ -29,7 +29,19 @@ export function* notAuthorizeSaga(action){
     catch (e) {
         yield put({type: ACTION.GET_USER_ERROR,error: e});
     }
+}
 
+export function* getUserTransactionsSaga(){
+    yield put({type: ACTION.GET_USER_TRANSACTIONS_REQUEST});
+    try{
+        const {data}=yield  restController.getUserTransactions();
+        console.log(data);
+        yield  put({type: ACTION.GET_USER_TRANSACTIONS_SUCCESS, data});
+
+    }
+    catch (error) {
+        yield put({type: ACTION.GET_USER_TRANSACTIONS_ERROR, error});
+    }
 }
 
 

@@ -38,4 +38,5 @@ export const loginRequest = (data) => http.post('/users/login', data);
 export const getUser = () => http.get('/users/get');
 export const cashOut = (data) => http.post('/users/cashout', data);
 export const payMent = (data) => http.post('/users/pay', data.formData);
+export const getUserTransactions = () => http.get('/users/transactions');
 export const changeMark = (data) => http.post('/users/changeMark', data);

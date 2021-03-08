@@ -8,10 +8,10 @@
 started_at=$(date +"%s")
 
 echo "-----> Provisioning containers"
-docker-compose --file docker-compose-dev.yaml up
+docker-compose --file docker-compose.dev.yaml up
 echo ""
 
-web=$(docker-compose --file docker-compose-dev.yaml ps | grep squadhelp_server-dev_1 | awk '{print $1}')
+web=$(docker-compose --file docker-compose.dev.yaml ps | grep squadhelp_server-dev_1 | awk '{print $1}')
 
 # Run Sequalize's migrations.
 echo "-----> Running application migrations"
