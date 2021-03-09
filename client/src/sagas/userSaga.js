@@ -1,4 +1,5 @@
 import {put} from 'redux-saga/effects';
+import { getUserTransactionsError, getUserTransactionsRequest, getUserTransactionsSuccess } from '../actions/actionCreator';
 import ACTION from '../actions/actionTypes';
 import * as restController from '../api/rest/restController';
 import {controller} from '../api/ws/socketController';
@@ -31,16 +32,19 @@ export function* notAuthorizeSaga(action){
     }
 }
 
-export function* getUserTransactionsSaga(){
-    yield put({type: ACTION.GET_USER_TRANSACTIONS_REQUEST});
+export function* getUserTransactionsSaga(action){
+    const {data} = action
+    yield put(getUserTransactionsRequest());
     try{
-        const {data}=yield  restController.getUserTransactions();
-        console.log(data);
-        yield  put({type: ACTION.GET_USER_TRANSACTIONS_SUCCESS, data});
-
+        const {
+            data: {
+                data: transactions
+            }
+        } = yield restController.getUserTransactions();
+        yield  put(getUserTransactionsSuccess(transactions));
     }
     catch (error) {
-        yield put({type: ACTION.GET_USER_TRANSACTIONS_ERROR, error});
+        yield put(getUserTransactionsError(error));
     }
 }
 

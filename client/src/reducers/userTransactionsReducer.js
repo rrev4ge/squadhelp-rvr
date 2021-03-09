@@ -4,7 +4,7 @@ import ACTION from '../actions/actionTypes'
 const initialState = {
     isFetching: false,
     error: null,
-    transactions: []
+    transactions: [],
 }
 
 export default (state = initialState, { type, data, error }) => {
@@ -13,12 +13,13 @@ export default (state = initialState, { type, data, error }) => {
     case ACTION.GET_USER_TRANSACTIONS_REQUEST:
         return produce(state, draftState => { 
             draftState.isFetching = true;
+            draftState.error = null;
         })
 
     case ACTION.GET_USER_TRANSACTIONS_SUCCESS:
         return produce(state, draftState => {
             draftState.isFetching = false;
-            draftState.isFetching = [...data];
+            draftState.transactions = [...data];
         })
 
     case ACTION.GET_USER_TRANSACTIONS_ERROR:

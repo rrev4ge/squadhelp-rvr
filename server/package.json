@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node -r dotenv/config ./server.js",
-    "start-dev": "nodemon -r dotenv/config ./server.js",
+    "start-dev": "nodemon -L -r dotenv/config ./server.js",
     "test": "jest"
   },
   "dependencies": {

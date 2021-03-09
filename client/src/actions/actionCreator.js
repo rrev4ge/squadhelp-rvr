@@ -47,10 +47,30 @@ export const getUserAction = (data) => {
     }
 };
 
-export const getUserTransactionAction = (data) => {
+export const getUserTransactionsAction = (data) => {
     return {
         type: ACTION.GET_USER_TRANSACTIONS_ACTION,
-        payload: data
+        data: data
+    }
+}
+
+export const getUserTransactionsRequest = (data) => {
+    return {
+        type: ACTION.GET_USER_TRANSACTIONS_REQUEST
+    }
+}
+
+export const getUserTransactionsSuccess = (data) => {
+    return {
+        type: ACTION.GET_USER_TRANSACTIONS_SUCCESS,
+        data: data
+    }
+}
+
+export const getUserTransactionsError = (error) => {
+    return {
+        type: ACTION.GET_USER_TRANSACTIONS_ERROR,
+        data: error
     }
 }
 

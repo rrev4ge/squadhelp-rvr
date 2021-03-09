@@ -1,7 +1,11 @@
 import {takeLatest, takeLeading, takeEvery} from 'redux-saga/effects';
 import ACTION from '../actions/actionTypes';
 import {registerSaga, loginSaga} from './authSagas';
-import {privateSaga, updateUserData, notAuthorizeSaga, headerRequest, getUserTransactionsSaga} from './userSaga';
+import {privateSaga,
+    updateUserData,
+    notAuthorizeSaga,
+    headerRequest,
+    getUserTransactionsSaga} from './userSaga';
 import {paymentSaga, cashoutSaga} from './paymentSaga';
 import {
     activeContestsSaga,
@@ -30,7 +34,6 @@ function* rootSaga() {
     yield  takeLatest(ACTION.AUTH_ACTION_REGISTER, registerSaga);
     yield  takeLatest(ACTION.AUTH_ACTION_LOGIN, loginSaga);
     yield  takeEvery(ACTION.GET_USER_ACTION, privateSaga);
-    yield  takeEvery(ACTION.GET_USER_TRANSACTIONS_ACTION, getUserTransactionsSaga);
     yield  takeEvery(ACTION.GET_DATA_FOR_CONTEST_ACTION, dataForContestSaga);
     yield  takeLatest(ACTION.PAYMENT_ACTION, paymentSaga);
     yield  takeLatest(ACTION.CASHOUT_ACTION, cashoutSaga);
@@ -56,6 +59,7 @@ function* rootSaga() {
     yield  takeLatest(ACTION.DELETE_CATALOG_REQUEST,deleteCatalog);
     yield  takeLatest(ACTION.REMOVE_CHAT_FROM_CATALOG_REQUEST,removeChatFromCatalogSaga);
     yield  takeLatest(ACTION.CHANGE_CATALOG_NAME_REQUEST,changeCatalogName);
+    yield  takeEvery(ACTION.GET_USER_TRANSACTIONS_ACTION, getUserTransactionsSaga);
 }
 
 export default rootSaga;

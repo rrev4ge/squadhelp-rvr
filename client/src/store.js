@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import {initSocket} from './api/ws/socketController';
 import rootReducer from './reducers';
-import rootSaga from './sagas/rootSaga';
+import rootSaga from './sagas';
 
 
 const sagaMiddleware=createSagaMiddleware();

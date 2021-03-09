@@ -30,6 +30,7 @@ module.exports.login = async (req, res, next) => {
     next(err);
   }
 };
+
 module.exports.registration = async (req, res, next) => {
   try {
     const newUser = await userQueries.userCreation(
@@ -128,7 +129,6 @@ module.exports.changeMark = async (req, res, next) => {
 module.exports.payment = async (req, res, next) => {
   let transaction;
   const { body: { number, cvc, expiry, price, contests }, tokenData:{ userId } } = req;
-  console.log(req);
   try {
     transaction = await db.sequelize.transaction();
     await bankQueries.updateBankBalance({
@@ -236,15 +236,20 @@ module.exports.cashout = async (req, res, next) => {
 
 module.exports.getTransactions = async (req, res, next) => {
 
+  const { tokenData:{ userId } } = req;
+
   try {
     const transactions = await db.Transaction.findAll({
+      where: {
+        userId,
+      },
       attributes: ['id', 'type', 'sum'],
       include: {
         model: db.Users,
         attributes: ['displayName'],
       },
     });
-    res.send(transactions);
+    res.send({ data: transactions });
   }
   catch (err) {
     next(err);

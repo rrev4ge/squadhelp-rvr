@@ -1,40 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import Header from '../../components/Header/Header';
-import TransactionsList from '../../components/TransactonsList/index';
+import TransactionsList from '../../components/TransactonsList';
 import styles from './TransactionPage.module.sass'
-
-// const transactions = false
-
-const transactions = [
-    {
-        id: 1,
-        type: true,
-        sum: 100,
-        user: 'Vasia',
-    },
-    {
-        id: 2,
-        type: true,
-        sum: 100,
-        user: 'John Doy',
-    },
-    {
-        id: 3,
-        type: false,
-        sum: 300,
-        user: 'Johanna Doy',
-    },
-    {
-        id: 4,
-        type: true,
-        sum: 400,
-        user: 'Del Toro',
-    },
-]
+import { bindActionCreators } from 'redux';
+import { getUserTransactionsAction } from '../../actions/actionCreator';
+import { useDispatch, useSelector } from 'react-redux';
+import _ from 'lodash';
+import { isEmpty } from 'lodash/isEmpty';
 
 function TransactionsPage(props) {
 
+    const {transactions, isFetching, error} = useSelector(({userTransactions}) =>  userTransactions);
+    const dispatch = useDispatch();
+    const getTransactions = bindActionCreators(getUserTransactionsAction, dispatch);
+
+    useEffect(()=>{
+        getTransactions()
+    },[]);
+
+    const isEmpty = _.isEmpty(transactions)
 
     const listClasses = {
         table: styles.table,
@@ -43,6 +28,7 @@ function TransactionsPage(props) {
         tableItem: styles.tableItem,
         headerData: styles.headerData,
         itemData: styles.itemData,
+        noData: styles.noData,
     }
 
     return (
@@ -50,21 +36,18 @@ function TransactionsPage(props) {
             <Header />
             <div className={styles.listWrapper}>
                 <div className={styles.listName}>Users Transactions</div>
-                {
-                    transactions 
-                    ? <TransactionsList transactions={transactions} classes={listClasses}/>
-                    : <div className={styles.noData}>No transactions</div>
-                }
-                
+                {   
+                !isEmpty
+                ?
+                <TransactionsList transactions={transactions} classes={listClasses}/>
+                :
+                <div className={styles.noData}>No transactions.</div>
+                } 
             </div>
             
         </div>
     )
 }
-
-// TransactionsPage.propTypes = {
-
-// }
 
 export default TransactionsPage
 

@@ -59,7 +59,7 @@ userRouter.post(
 
 userRouter.get(
   '/transactions',
-  // checkToken.checkToken,
+  checkToken.checkToken,
   userController.getTransactions,
 );
 
